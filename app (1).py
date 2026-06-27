@@ -10,7 +10,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 
 # ---------- CONFIG ----------
-CORPUS_PATH = "/kaggle/input/competitions/niat-masterclass-rag-challenge/zyro-dynamics-hr-corpus"
+CORPUS_PATH = "zyro-dynamics-hr-corpus"
 
 os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 

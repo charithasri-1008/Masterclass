@@ -28,15 +28,24 @@ def load_rag():
 
     chunks = splitter.split_documents(documents)
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+  # Choose and initialize an embedding model
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    model_kwargs={'device': 'cpu'}
+)
 
-    vectorstore = FAISS.from_documents(chunks, embeddings)
+print("Embedding model initialized.")
 
-    retriever = vectorstore.as_retriever(
-        search_kwargs={"k":3}
-    )
+    # Build vector store
+vectorstore = FAISS.from_documents(chunks, embeddings)
+
+# Create retriever using MMR to fetch diverse and relevant context blocks
+retriever = vectorstore.as_retriever(
+    search_type="mmr",
+    search_kwargs={"k": 4, "fetch_k": 10}
+)
+
+print("Vector store initialized.")
 
     llm = ChatGroq(
         model="llama-3.3-70b-versatile",

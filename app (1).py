@@ -52,7 +52,7 @@ llm = ChatGroq(
         temperature=0.1
     )
 
- return retriever, llm
+return retriever, llm
 
 retriever, llm = load_rag()
 

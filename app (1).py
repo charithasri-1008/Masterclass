@@ -47,12 +47,12 @@ retriever = vectorstore.as_retriever(
 
 print("Vector store initialized.")
 
-    llm = ChatGroq(
+llm = ChatGroq(
         model="llama-3.3-70b-versatile",
         temperature=0.1
     )
 
-    return retriever, llm
+ return retriever, llm
 
 retriever, llm = load_rag()
 
